@@ -37,3 +37,16 @@ Los hologramas de bases nuevas muestran `/prote nombre NAME` hasta renombrarlas.
 - Opciones nuevas en `particles`: `size` y `range`. Los valores ausentes tienen defaults incorporados.
 - Los limites solo son visibles por jugadores situados dentro de la base, con la flag `borders` activada.
 - Para aplicar ajustes al intervalo de actualizacion de particulas se requiere reinicio (el periodo se fija en onEnable).
+
+## 1.0.4: bordes y diagnóstico
+- Pared de partículas de 7 bloques de alto (configurable con `particles.height`), partículas forzadas al cliente.
+- `/prote testborde` dibuja un círculo de partículas a 3 bloques del jugador para diagnosticar la visibilidad.
+- Los bordes solo se envían a jugadores dentro de una base que tenga la flag `borders` activada.
+- Prueba con Minecraft Opciones > Video > Partículas: Todas.
+
+## Correcciones 1.0.5
+- Los hologramas vuelven a generarse cuando carga el chunk de una protección y en el arranque diferido.
+- El teletransporte de /protes precarga el chunk de destino para que funcione también desde spawn si hay destino seguro.
+- Si otro plugin cancela el teletransporte, aparece un mensaje y se registra una advertencia en consola.
+- Los mundos permitidos en config controlan la COLOCACIÓN de protecciones, no la apertura de /protes.
+- La versión fuente no ha sido compilada en este entorno: generar JAR con GitHub Actions y probar en una copia del servidor.

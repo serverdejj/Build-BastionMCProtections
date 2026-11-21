@@ -76,6 +76,7 @@ particles:
   spacing: 1
   size: 1.5
   range: 96
+  height: 7
 messages:
   prefix: '&#FFD15B&lBASTION MC &8» &r'
   denied: '&cNo tienes permiso.'
@@ -97,6 +98,7 @@ messages:
   teleport: '&eTeletransporte en %seconds% segundos. No te muevas.'
   cancel: '&cTeletransporte cancelado.'
   unsafe: '&cNo hay un punto seguro disponible.'
+  teleport-blocked: '&cOtro plugin ha bloqueado el teletransporte. Contacta con un administrador.'
   rename: '&eEscribe /prote nombre NUEVO_NOMBRE dentro de tu protección.'
   confirm: '&eConfirma con /prote confirmar.'
   leave-confirm: '&e¿Seguro que quieres salir de %name%? Dueño: %owner%. Usa /prote
