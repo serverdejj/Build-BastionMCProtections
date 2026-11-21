@@ -85,8 +85,40 @@ public final class Protections extends JavaPlugin implements Listener, TabExecut
  @EventHandler public void quit(PlayerQuitEvent e){UUID u=e.getPlayer().getUniqueId();teleports.remove(u);merges.remove(u);confirmations.remove(u);bypass.remove(u);}
  void notifyOps(String s){boolean sent=false;for(Player p:Bukkit.getOnlinePlayers())if(p.isOp()){p.sendMessage(color(s));sent=true;}if(!sent)notices.add(color(s));}
  void expire(){if(storageFailed||!getConfig().getBoolean("expiration.enabled",true))return;long now=System.currentTimeMillis(),day=86400000L;boolean changed=false;for(Base b:new ArrayList<>(bases.values())){if(b.permanent())continue;long remaining=b.last+day*getConfig().getInt("expiration.days",60)-now;if(remaining<=0){if(b.sections.stream().anyMatch(s->s.location()==null))continue;bases.remove(b.id);if(!save()){bases.put(b.id,b);return;}for(Section s:b.sections)s.location().getBlock().setType(Material.AIR);notifyOps(vars(msg("expired"),b));changed=true;}else{int days=(int)((remaining+day-1)/day);if(getConfig().getIntegerList("expiration.warning-days").contains(days)&&b.warned.add(days)){notifyOps(vars(msg("warn"),b).replace("%days%",String.valueOf(days)));changed=true;}}}if(changed){save();refreshHolograms();}}
- void particles(){for(Player p:Bukkit.getOnlinePlayers()){Base b=at(p.getLocation());if(b==null||!b.flags.getOrDefault("borders",false))continue;int y=p.getLocation().getBlockY();int step=Math.max(1,getConfig().getInt("particles.spacing",2));Color c;try{c=Color.fromRGB(Integer.parseInt(cfg("particles.color","#55FF88").replace("#",""),16));}catch(Exception e){c=Color.LIME;}Particle.DustOptions opt=new Particle.DustOptions(c,1);for(Section s:b.sections){for(int x=s.minX();x<=s.maxX();x+=step){border(p,b,x,y,s.minZ(),0,-1,opt);border(p,b,x,y,s.maxZ(),0,1,opt);}for(int z=s.minZ();z<=s.maxZ();z+=step){border(p,b,s.minX(),y,z,-1,0,opt);border(p,b,s.maxX(),y,z,1,0,opt);}}}}
- void border(Player p,Base b,int x,int y,int z,int dx,int dz,Particle.DustOptions opt){Location l=new Location(p.getWorld(),x+.5,y+.5,z+.5);if(b.contains(l.clone().add(dx,0,dz)))return;if(l.distanceSquared(p.getLocation())<=64*64)p.spawnParticle(Particle.DUST,l.add(dx*.5,0,dz*.5),1,0,0,0,0,opt);}
+ void particles(){
+  for(Player p:Bukkit.getOnlinePlayers()){
+   Base b=at(p.getLocation());
+   if(b==null||!b.flags.getOrDefault("borders",false))continue;
+   int y=p.getLocation().getBlockY();
+   int step=Math.max(1,getConfig().getInt("particles.spacing",1));
+   double range=Math.max(8,getConfig().getDouble("particles.range",96));
+   Color c;
+   try{c=Color.fromRGB(Integer.parseInt(cfg("particles.color","#55FF88").replace("#",""),16));}
+   catch(Exception ex){c=Color.LIME;}
+   Particle.DustOptions opt=new Particle.DustOptions(c,(float)Math.max(.5,Math.min(4,getConfig().getDouble("particles.size",1.5))));
+   for(Section s:b.sections){
+    for(int x=s.minX();x<=s.maxX();x+=step){
+     border(p,b,x,y,s.minZ(),0,-1,opt,range);
+     border(p,b,x,y,s.maxZ(),0,1,opt,range);
+    }
+    for(int z=s.minZ();z<=s.maxZ();z+=step){
+     border(p,b,s.minX(),y,z,-1,0,opt,range);
+     border(p,b,s.maxX(),y,z,1,0,opt,range);
+    }
+   }
+  }
+ }
+ void border(Player p,Base b,int x,int y,int z,int dx,int dz,Particle.DustOptions opt,double range){
+  // Check the block OUTSIDE the section. This also suppresses internal borders of merged sections.
+  Location outside=new Location(p.getWorld(),x+dx,y,z+dz);
+  if(b.contains(outside))return;
+  double px=x+.5+dx*.5,pz=z+.5+dz*.5;
+  for(int h=0;h<3;h++){
+   Location point=new Location(p.getWorld(),px,y+.25+h,pz);
+   if(point.distanceSquared(p.getLocation())<=range*range)
+    p.spawnParticle(Particle.DUST,point,1,0,0,0,0,opt);
+  }
+ }
  void refreshHolograms(){holograms.forEach(Entity::remove);holograms.clear();for(World w:Bukkit.getWorlds())for(TextDisplay d:w.getEntitiesByClass(TextDisplay.class))if(d.getPersistentDataContainer().has(holoKey,PersistentDataType.BYTE))d.remove();if(!getConfig().getBoolean("hologram.enabled",true))return;for(Base b:bases.values())for(Section s:b.sections){Location l=s.location();if(l==null||!l.getWorld().isChunkLoaded(l.getBlockX()>>4,l.getBlockZ()>>4))continue;List<String> lines=new ArrayList<>();for(String line:getConfig().getStringList("hologram.lines")){String v=vars(line.replace("%name%",b.unnamed?cfg("hologram.unnamed-name","/prote nombre NAME"):b.name),b).replace("%type%",typeName(s.type)).replace("%size%",s.size+"x"+s.size).replace("%permanent%",s.permanent?cfg("hologram.permanent","&aPERMANENTE"):"");if(!v.isBlank())lines.add(color(v));}TextDisplay d=l.getWorld().spawn(l.add(.5,getConfig().getDouble("hologram.height",1.4),.5),TextDisplay.class,x->{x.setText(String.join("\n",lines));x.setBillboard(Display.Billboard.CENTER);x.setBackgroundColor(Color.fromARGB(0));x.setDefaultBackground(false);x.setPersistent(false);x.setViewRange((float)(getConfig().getDouble("hologram.range",32)/64));x.getPersistentDataContainer().set(holoKey,PersistentDataType.BYTE,(byte)1);});holograms.add(d);}}
  Inventory menu(String kind,Base b,Section s,int page){Menu h=new Menu(kind,b==null?null:b.id,s,page,new HashMap<>(),new HashMap<>());return Bukkit.createInventory(h,9*Math.max(1,Math.min(6,getConfig().getInt(kind+".rows",3))),color(cfg(kind+".title",kind)));}
  void button(Inventory inv,String action,Base b,String state){Menu h=(Menu)inv.getHolder();String k="ui."+action+".";int slot=getConfig().getInt(k+"slot",-1);if(slot<0||slot>=inv.getSize())return;String n=cfg(k+"name",action).replace("%state%",state);if(b!=null)n=vars(n,b);inv.setItem(slot,item(material(cfg(k+"material","PAPER")),n,getConfig().getStringList(k+"lore")));h.actions.put(slot,action);}

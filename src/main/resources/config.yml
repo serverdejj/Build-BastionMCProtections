@@ -71,9 +71,11 @@ hologram:
   - '&eClic derecho para administrar'
   permanent: '&a&lPERMANENTE'
 particles:
-  interval-ticks: 20
+  interval-ticks: 10
   color: '#55FF88'
-  spacing: 2
+  spacing: 1
+  size: 1.5
+  range: 96
 messages:
   prefix: '&#FFD15B&lBASTION MC &8» &r'
   denied: '&cNo tienes permiso.'

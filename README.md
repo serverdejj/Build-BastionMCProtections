@@ -29,3 +29,11 @@ Comandos: /protecciones, /protes, /prote home, /prote homes, /prote agregar a NA
 
 ## 1.0.2
 Los hologramas de bases nuevas muestran `/prote nombre NAME` hasta renombrarlas. Ajustable en `hologram.unnamed-name`. Conserva nombres internos únicos para comandos y datos; no requiere borrar data.yml. Los nombres antiguos con identificador hexadecimal se migran; los nombres personalizados existentes se conservan. Compilación y pruebas en servidor pendientes.
+
+
+## 1.0.3: Correccion de limites de particulas
+- Corrige el chequeo de la celda exterior que ocultaba parte del perimetro.
+- Emite columnas de particulas a la altura del espectador en tres niveles y sin mostrar bordes interiores de secciones unidas.
+- Opciones nuevas en `particles`: `size` y `range`. Los valores ausentes tienen defaults incorporados.
+- Los limites solo son visibles por jugadores situados dentro de la base, con la flag `borders` activada.
+- Para aplicar ajustes al intervalo de actualizacion de particulas se requiere reinicio (el periodo se fija en onEnable).
