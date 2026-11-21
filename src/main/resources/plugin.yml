@@ -1,8 +1,8 @@
 name: BastionMCProtections
-version: 1.0.5
+version: 1.0.6
 main: mc.bastion.protections.Protections
 api-version: '1.21'
-softdepend: [Vault, LuckPerms, WorldGuard, WorldEdit]
+softdepend: [Vault, LuckPerms, WorldGuard, WorldEdit, BastionMCNameTangs]
 commands:
   prote:
     description: Administrar protecciones

@@ -1,0 +1,9 @@
+BastionMCProtections 1.0.6 - compatibilidad con BastionMCNameTangs
+
+Antes de teletransportarse por /protes o /prote home, el plugin pide a BastionMCNameTangs que desmonte el TextDisplay pasajero; entonces ejecuta Player.teleport y el nametag se vuelve a crear tras el viaje.
+
+Compatible con BastionMCNameTangs 1.0.19 mediante prepareRtpTravel (ya existente), y con 1.0.20 mediante prepareProtectionTravel.
+
+No modifica data.yml ni config.yml. Hacer copia de seguridad de plugins/BastionMCProtections/data.yml antes de cambiar el JAR.
+
+Este proyecto no fue compilado ni probado en un servidor Purpur en este entorno. Compilar en GitHub Actions y probar en una copia del servidor.
