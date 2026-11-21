@@ -1,0 +1,238 @@
+worlds:
+- world
+limits:
+  default: 3
+  shared: 30
+  coowners: 4
+  permissions:
+    bastionprotections.limit.4: 4
+    bastionprotections.limit.5: 5
+    bastionprotections.limit.6: 6
+    bastionprotections.limit.7: 7
+    bastionprotections.limit.8: 8
+teleport:
+  seconds: 5
+expiration:
+  days: 60
+  enabled: true
+  warning-days:
+  - 3
+  - 2
+  - 1
+worldguard:
+  enabled: true
+  allowed-regions: []
+shop:
+  title: '&#FFD15B&lProtecciones'
+  rows: 3
+  web-url: https://tu-tienda.tebex.io
+homes:
+  title: '&#FFD15B&lMis protecciones'
+  rows: 6
+  lore:
+  - '&7Dueño: &f%owner%'
+  - '&7Rol: &f%role%'
+  - '&aClic izquierdo: teletransporte'
+  - '&eClic derecho: renombrar (administradores)'
+management:
+  title: '&#FFD15B&lAdministración'
+  rows: 3
+flags:
+  title: '&#FFD15B&lFlags'
+  rows: 3
+  defaults:
+    mobs: true
+    elytra: true
+    pvp: false
+    borders: false
+hologram:
+  enabled: true
+  height: 1.4
+  range: 32
+  lines:
+  - '%type%'
+  - '&e%name%'
+  - '&7Dueño: &f%owner%'
+  - '&7Área: &f%size%'
+  - '%permanent%'
+  - '&eClic derecho para administrar'
+  permanent: '&a&lPERMANENTE'
+particles:
+  interval-ticks: 20
+  color: '#55FF88'
+  spacing: 2
+messages:
+  prefix: '&#FFD15B&lBASTION MC &8» &r'
+  denied: '&cNo tienes permiso.'
+  world: '&cNo puedes colocar protecciones en este mundo.'
+  overlap: '&cEl terreno se superpone con otra protección o región administrativa.'
+  join-required: '&cNo puedes juntar dos protecciones sin usar /prote unir NAME1 NAME2.
+    La siguiente protección se unirá a la base.'
+  limit: '&cHas alcanzado el límite de protecciones.'
+  shared-limit: '&cEste usuario ha alcanzado el límite de protecciones añadidas.'
+  placed: '&aProtección colocada.'
+  saved: '&aCambios guardados.'
+  unknown: '&cNo se encontró la protección o jugador.'
+  money: '&cNo tienes suficiente dinero o la economía no está disponible.'
+  full: '&cTu inventario está lleno.'
+  cooldown: '&cTodavía no puedes reclamar otra protección de Carbón.'
+  bought: '&aProtección recibida.'
+  enter: '&7Has entrado al territorio de &a%owner%'
+  leave: '&7Has salido del territorio de &c%owner%'
+  banned: '&cNo puedes entrar a esta protección.'
+  teleport: '&eTeletransporte en %seconds% segundos. No te muevas.'
+  cancel: '&cTeletransporte cancelado.'
+  unsafe: '&cNo hay un punto seguro disponible.'
+  rename: '&eEscribe /prote nombre NUEVO_NOMBRE dentro de tu protección.'
+  confirm: '&eConfirma con /prote confirmar.'
+  leave-confirm: '&e¿Seguro que quieres salir de %name%? Dueño: %owner%. Usa /prote
+    confirmar.'
+  transfer: '&e%owner% quiere transferirte %name%. Usa /prote aceptar o /prote rechazar.'
+  warn: '&cLa protección %name% de %owner% caducará en %days% días.'
+  expired: '&cLa protección %name% de %owner% ha caducado.'
+  help: '&e/prote agregar a NAME | remover a NAME | codueño agregar/remover a NAME
+    | ban/unban NAME | flags | unir NAME1 NAME2 | setspawn prote NAME | transferir
+    a NAME | salirse de NAME | home'
+  permanent: '&aPERMANENTE'
+  reloaded: '&aConfiguración recargada.'
+types:
+  carbon:
+    name: '&#AAAAAA&lProtección de Carbón'
+    material: COAL_BLOCK
+    size: 15
+    price: 0
+    slot: 10
+    permanent: false
+    web-only: false
+    claim-hours: 24
+    lore:
+    - '&7Área: &f%size%'
+    - '&7Precio: &a%price%'
+    - '&eClic para obtener'
+  cobre:
+    name: '&#D98B57&lProtección de Cobre'
+    material: COPPER_BLOCK
+    size: 25
+    price: 2500
+    slot: 11
+    permanent: false
+    web-only: false
+    claim-hours: 0
+    lore:
+    - '&7Área: &f%size%'
+    - '&7Precio: &a%price%'
+    - '&eClic para obtener'
+  oro:
+    name: '&#FFD700&lProtección de Oro'
+    material: GOLD_BLOCK
+    size: 35
+    price: 5000
+    slot: 12
+    permanent: false
+    web-only: false
+    claim-hours: 0
+    lore:
+    - '&7Área: &f%size%'
+    - '&7Precio: &a%price%'
+    - '&eClic para obtener'
+  hierro:
+    name: '&#EEEEEE&lProtección de Hierro'
+    material: IRON_BLOCK
+    size: 50
+    price: 7500
+    slot: 14
+    permanent: false
+    web-only: false
+    claim-hours: 0
+    lore:
+    - '&7Área: &f%size%'
+    - '&7Precio: &a%price%'
+    - '&eClic para obtener'
+  diamante:
+    name: '&#55FFFF&lProtección de Diamante'
+    material: DIAMOND_BLOCK
+    size: 75
+    price: 12000
+    slot: 15
+    permanent: false
+    web-only: false
+    claim-hours: 0
+    lore:
+    - '&7Área: &f%size%'
+    - '&7Precio: &a%price%'
+    - '&eClic para obtener'
+  netherite:
+    name: '&#B56AFF&lProtección de Netherite'
+    material: NETHERITE_BLOCK
+    size: 100
+    price: 0
+    slot: 16
+    permanent: true
+    web-only: true
+    claim-hours: 0
+    lore:
+    - '&7Área: &f%size%'
+    - '&aPERMANENTE'
+    - '&d$5 USD'
+    - '&eClic para visitar Tebex'
+ui:
+  previous:
+    material: ARROW
+    name: '&eAnterior'
+    slot: 45
+  next:
+    material: ARROW
+    name: '&eSiguiente'
+    slot: 53
+  info:
+    material: BOOK
+    name: '&eInformación'
+    slot: 4
+  members:
+    material: PLAYER_HEAD
+    name: '&eMiembros: %members%'
+    slot: 10
+  coowners:
+    material: GOLDEN_HELMET
+    name: '&eCodueños: %coowners%'
+    slot: 11
+  bans:
+    material: BARRIER
+    name: '&cVetados: %bans%'
+    slot: 12
+  flags:
+    material: COMPARATOR
+    name: '&eFlags'
+    slot: 13
+  rename:
+    material: NAME_TAG
+    name: '&eRenombrar'
+    slot: 14
+  spawn:
+    material: COMPASS
+    name: '&eEstablecer spawn'
+    slot: 15
+  remove:
+    material: TNT
+    name: '&cRetirar sección'
+    slot: 16
+  leave:
+    material: OAK_DOOR
+    name: '&cAbandonar'
+    slot: 22
+  mobs:
+    material: ZOMBIE_HEAD
+    name: '&eMobs: %state%'
+    slot: 10
+  elytra:
+    material: ELYTRA
+    name: '&eElytras: %state%'
+    slot: 12
+  pvp:
+    material: DIAMOND_SWORD
+    name: '&ePvP: %state%'
+    slot: 14
+  borders:
+    material: GLOWSTONE_DUST
+    name: '&eLímites: %state%'
+    slot: 16
