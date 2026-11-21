@@ -17,3 +17,15 @@ Código sin compilación verificada ni pruebas de ejecución en este entorno. Gu
 - Intentos de robo indirectos, eventos de plugins y acceso desde límites; estas pruebas son bloqueantes para producción.
 
 Comandos: /protecciones, /protes, /prote home, /prote homes, /prote agregar a NAME, /prote remover a NAME, /prote codueño agregar a NAME, /prote codueño remover a NAME, /prote ban NAME, /prote unban NAME, /prote flags, /prote nombre NAME, /prote setspawn prote NAME, /prote resetspawn prote NAME, /prote unir NAME1 NAME2, /prote salirse de NAME, /prote transferir a NAME, /prote aceptar, /prote rechazar, /prote confirmar, /prote give NAME tipo cantidad, /prote admin bypass, /prote admin info, /prote reload.
+
+## 1.0.1
+- Contador de Carbón actualizado cada segundo en el menú; precios con separadores y color según saldo.
+- /prote abre el menú; /proteunir prepara la unión; máximo 4 secciones.
+- Límites de miembros 20/30/40/40; listas de cabezas para miembros, codueños y vetados; fechas persistentes cuando se conocen.
+- Nombres iniciales legibles y migración de nombres automáticos antiguos; botón de spawn muestra instrucciones.
+- Los menús de listas son de consulta; gestionar altas/bajas mediante comandos originales.
+- Conserva data.yml y copia de respaldo. Guarda el config.yml anterior y combina tus personalizaciones con el nuevo config.yml incluido. No borres los datos. Si una base antigua supera un límite nuevo no se expulsan miembros automáticamente.
+- Validación de YAML realizada; compilación y pruebas en Purpur pendientes.
+
+## 1.0.2
+Los hologramas de bases nuevas muestran `/prote nombre NAME` hasta renombrarlas. Ajustable en `hologram.unnamed-name`. Conserva nombres internos únicos para comandos y datos; no requiere borrar data.yml. Los nombres antiguos con identificador hexadecimal se migran; los nombres personalizados existentes se conservan. Compilación y pruebas en servidor pendientes.

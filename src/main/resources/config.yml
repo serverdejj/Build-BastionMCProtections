@@ -10,6 +10,12 @@ limits:
     bastionprotections.limit.6: 6
     bastionprotections.limit.7: 7
     bastionprotections.limit.8: 8
+  merge-max: 4
+  members:
+    '1': 20
+    '2': 30
+    '3': 40
+    '4': 40
 teleport:
   seconds: 5
 expiration:
@@ -26,6 +32,12 @@ shop:
   title: '&#FFD15B&lProtecciones'
   rows: 3
   web-url: https://tu-tienda.tebex.io
+  free: GRATIS
+  affordable-color: '&a'
+  unaffordable-color: '&c'
+  cooldown-line: '&cDisponible en: &e%time%'
+  insufficient-line: '&cDinero insuficiente'
+  available-line: '&eClic para obtener'
 homes:
   title: '&#FFD15B&lMis protecciones'
   rows: 6
@@ -46,6 +58,7 @@ flags:
     pvp: false
     borders: false
 hologram:
+  unnamed-name: "/prote nombre NAME"
   enabled: true
   height: 1.4
   range: 32
@@ -66,8 +79,7 @@ messages:
   denied: '&cNo tienes permiso.'
   world: '&cNo puedes colocar protecciones en este mundo.'
   overlap: '&cEl terreno se superpone con otra protección o región administrativa.'
-  join-required: '&cNo puedes juntar dos protecciones sin usar /prote unir NAME1 NAME2.
-    La siguiente protección se unirá a la base.'
+  join-required: '&cNo puedes juntar dos protecciones sin usar /proteunir NAME1 NAME2.'
   limit: '&cHas alcanzado el límite de protecciones.'
   shared-limit: '&cEste usuario ha alcanzado el límite de protecciones añadidas.'
   placed: '&aProtección colocada.'
@@ -90,11 +102,16 @@ messages:
   transfer: '&e%owner% quiere transferirte %name%. Usa /prote aceptar o /prote rechazar.'
   warn: '&cLa protección %name% de %owner% caducará en %days% días.'
   expired: '&cLa protección %name% de %owner% ha caducado.'
-  help: '&e/prote agregar a NAME | remover a NAME | codueño agregar/remover a NAME
-    | ban/unban NAME | flags | unir NAME1 NAME2 | setspawn prote NAME | transferir
-    a NAME | salirse de NAME | home'
+  help: '&eUsa /prote para ver tus bases o /protecciones para comprar.'
   permanent: '&aPERMANENTE'
   reloaded: '&aConfiguración recargada.'
+  no-homes: '&7Por el momento no tienes ninguna protección. Usa &a/protecciones &7para
+    comprar una.'
+  merge-limit: '&cSolo puedes unir 4 protecciones por base.'
+  member-limit: '&cEsta base ha alcanzado su límite de miembros.'
+  merge-usage: '&eUsa /proteunir NAME1 NAME2'
+  merge-ready: '&aColoca la siguiente protección junto a tu base.'
+  spawn-guide: '&7Ve a un lugar de tu protección y usa &e/prote setspawn prote %name%'
 types:
   carbon:
     name: '&#AAAAAA&lProtección de Carbón'
@@ -107,8 +124,8 @@ types:
     claim-hours: 24
     lore:
     - '&7Área: &f%size%'
-    - '&7Precio: &a%price%'
-    - '&eClic para obtener'
+    - '&7Precio: %price%'
+    - '%status%'
   cobre:
     name: '&#D98B57&lProtección de Cobre'
     material: COPPER_BLOCK
@@ -120,8 +137,8 @@ types:
     claim-hours: 0
     lore:
     - '&7Área: &f%size%'
-    - '&7Precio: &a%price%'
-    - '&eClic para obtener'
+    - '&7Precio: %price%'
+    - '%status%'
   oro:
     name: '&#FFD700&lProtección de Oro'
     material: GOLD_BLOCK
@@ -133,8 +150,8 @@ types:
     claim-hours: 0
     lore:
     - '&7Área: &f%size%'
-    - '&7Precio: &a%price%'
-    - '&eClic para obtener'
+    - '&7Precio: %price%'
+    - '%status%'
   hierro:
     name: '&#EEEEEE&lProtección de Hierro'
     material: IRON_BLOCK
@@ -146,8 +163,8 @@ types:
     claim-hours: 0
     lore:
     - '&7Área: &f%size%'
-    - '&7Precio: &a%price%'
-    - '&eClic para obtener'
+    - '&7Precio: %price%'
+    - '%status%'
   diamante:
     name: '&#55FFFF&lProtección de Diamante'
     material: DIAMOND_BLOCK
@@ -159,8 +176,8 @@ types:
     claim-hours: 0
     lore:
     - '&7Área: &f%size%'
-    - '&7Precio: &a%price%'
-    - '&eClic para obtener'
+    - '&7Precio: %price%'
+    - '%status%'
   netherite:
     name: '&#B56AFF&lProtección de Netherite'
     material: NETHERITE_BLOCK
@@ -190,7 +207,7 @@ ui:
     slot: 4
   members:
     material: PLAYER_HEAD
-    name: '&eMiembros: %members%'
+    name: '&eMiembros: %members%/%member_limit%'
     slot: 10
   coowners:
     material: GOLDEN_HELMET
@@ -236,3 +253,31 @@ ui:
     material: GLOWSTONE_DUST
     name: '&eLímites: %state%'
     slot: 16
+  back:
+    slot: 49
+    material: ARROW
+    name: '&eVolver'
+people:
+  unknown-date: Sin registro
+  date-format: dd/MM/yyyy HH:mm
+  members:
+    name: '&e%player%'
+    lore:
+    - '&7Jugador de confianza'
+  coowners:
+    name: '&e%player%'
+    lore:
+    - '&7Codueño desde: &f%date%'
+  bans:
+    name: '&c%player%'
+    lore:
+    - '&7Vetado desde: &f%date%'
+list-members:
+  title: '&#FFD15B&lMiembros'
+  rows: 6
+list-coowners:
+  title: '&#FFD15B&lCodueños'
+  rows: 6
+list-bans:
+  title: '&#FFD15B&lVetados'
+  rows: 6
