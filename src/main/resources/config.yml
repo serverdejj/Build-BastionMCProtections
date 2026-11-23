@@ -78,6 +78,7 @@ particles:
   range: 96
   height: 7
 messages:
+  combat-pvp-locked: "&c&l¡PVP BLOQUEADO! &fNo puedes desactivar el PvP mientras haya jugadores en combate dentro de esta protección."
   prefix: '&#FFD15B&lBASTION MC &8» &r'
   denied: '&cNo tienes permiso.'
   world: '&cNo puedes colocar protecciones en este mundo.'
@@ -285,3 +286,4 @@ list-coowners:
 list-bans:
   title: '&#FFD15B&lVetados'
   rows: 6
+
